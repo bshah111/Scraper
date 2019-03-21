@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rmglennon/web-scraping-mongodb.git"
+    "url": "git+https://github.com/bshah111/Scraper.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rmglennon/web-scraping-mongodb/issues"
+    "url": "https://github.com/bshah111/Scraper/issues"
   },
-  "homepage": "https://github.com/rmglennon/web-scraping-mongodb#readme",
+  "homepage": "https://github.com/bshah111/Scraper#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cheerio": "^1.0.0-rc.2",
