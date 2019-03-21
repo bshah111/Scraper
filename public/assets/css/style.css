@@ -1,0 +1,28 @@
+.jumbotron {
+  background-color: #a29df2;
+  color: #f1f0f6;
+}
+
+.display-4 {
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.lead {
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.btn-primary {
+  background-color: #a29df2;
+  color: #f1f0f6 !important;
+}
+
+.note-item-list {
+  padding: 5px;
+}
+body{
+  background-image: url("/assets/img/bg1.jpg");
+  background-size: 100%;
+  background-repeat: repeat;
+}
