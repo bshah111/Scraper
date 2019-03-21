@@ -35,13 +35,14 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 // Hook mongojs configuration to the db variable
-var db = require("./models");
-
+// var db = require("./models");
+var Note = require("./models/Note.js");
+var Article = require("./models/Article.js");
 
 // get all articles from the database that are not saved
 app.get("/", function(req, res) {
 
-  db.Article.find({
+  Article.find({
       saved: false
     },
 
@@ -70,7 +71,7 @@ app.get("/scrape", function(req, res) {
 
       // if these are present in the scraped data, create an article in the database collection
       if (title && link && intro) {
-        db.Article.create({
+        Article.create({
             title: title,
             link: link,
             intro: intro
@@ -96,7 +97,7 @@ app.get("/scrape", function(req, res) {
 
 // route for retrieving all the saved articles
 app.get("/saved", function(req, res) {
-  db.Article.find({
+  Article.find({
       saved: true
     })
     .then(function(dbArticle) {
@@ -114,7 +115,7 @@ app.get("/saved", function(req, res) {
 
 // route for setting an article to saved
 app.put("/saved/:id", function(req, res) {
-  db.Article.findByIdAndUpdate(
+  Article.findByIdAndUpdate(
       req.params.id, {
         $set: req.body
       }, {
@@ -132,10 +133,10 @@ app.put("/saved/:id", function(req, res) {
 
 // route for saving a new note to the db and associating it with an article
 app.post("/submit/:id", function(req, res) {
-  db.Note.create(req.body)
+  Note.create(req.body)
     .then(function(dbNote) {
       var articleIdFromString = mongoose.Types.ObjectId(req.params.id)
-      return db.Article.findByIdAndUpdate(articleIdFromString, {
+      return Article.findByIdAndUpdate(articleIdFromString, {
         $push: {
           notes: dbNote._id
         }
@@ -152,7 +153,7 @@ app.post("/submit/:id", function(req, res) {
 
 // route to find a note by ID
 app.get("/notes/article/:id", function(req, res) {
-  db.Article.findOne({"_id":req.params.id})
+  Article.findOne({"_id":req.params.id})
     .populate("notes")
     .exec (function (error, data) {
         if (error) {
@@ -166,7 +167,7 @@ app.get("/notes/article/:id", function(req, res) {
 
 app.get("/notes/:id", function(req, res) {
 
-  db.Note.findOneAndRemove({_id:req.params.id}, function (error, data) {
+  Note.findOneAndRemove({_id:req.params.id}, function (error, data) {
       if (error) {
           console.log(error);
       } else {

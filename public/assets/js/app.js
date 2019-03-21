@@ -1,12 +1,5 @@
 $(document).ready(function() {
 
-  // createPage();
-  // 
-  // // load the page initially with articles
-  // function createPage() {
-  //   location.window.href = '/';
-  // };
-
 
   // when the save button is clicked, get the article ID and set its saved property to true
   $(".save-btn").on("click", function(event) {
